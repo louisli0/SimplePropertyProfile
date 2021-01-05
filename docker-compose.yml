@@ -1,0 +1,35 @@
+version: '3.5'
+
+networks:
+  localdev:
+    name: localdev
+
+services:
+#   main-api:
+#    build: RealEstateAPI/
+#    restart: always
+#    ports:
+#      - "5000:80"
+#    depends_on:
+#      - db_server`
+
+#    networks:
+#      - localdev
+
+  db_server:
+    image: mcr.microsoft.com/mssql/server:2017-CU21-ubuntu-16.04
+    container_name: db_server
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Password1234
+      - MSSQL_TCP_PORT=1433
+    ports:
+      - "1400:1433"
+    networks:
+      - localdev
+
+#   redis:
+#     image: redis
+#     container_name: redis
+#     ports:
+#       - "6379:6379"
